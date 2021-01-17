@@ -1,0 +1,5 @@
+{
+    "phpsab.executablePathCBF": "/home/tend/TSWD/RallyChampionshipManager/vendor/bin/phpcbf",
+    "phpsab.executablePathCS": "/home/tend/TSWD/RallyChampionshipManager/vendor/bin/phpcs",
+    "phpsab.snifferEnable": false
+}
