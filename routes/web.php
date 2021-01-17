@@ -21,4 +21,5 @@ Route::get(
 );
 
 
+Route::get('/championship/archived', [ChampionshipController::class, 'index_archived']);
 Route::resource('championship', ChampionshipController::class);

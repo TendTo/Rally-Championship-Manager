@@ -19,6 +19,17 @@ class ChampionshipController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_archived()
+    {
+        $collection = Championship::all()->where('archived', '=', true);
+        return view("championship.index_archived", compact('collection'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -37,11 +48,7 @@ class ChampionshipController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate(
-            [
-                'name' => ["required", "string", "unique:championships"],
-                'desc' => '',
-                'date' => ["required", "date"],
-            ]
+            Championship::get_validation_create()
         );
         Championship::create($data);
 
@@ -81,12 +88,16 @@ class ChampionshipController extends Controller
     public function update(Request $request, Championship $championship)
     {
         $data = $request->validate(
-            [
-                'name' => ["required", "string", "unique:championships"],
-                'desc' => '',
-                'date' => ["required", "date"],
-            ]
+            $championship->get_validation_update()
         );
+
+        if($request->has('archived')) {
+            $data['archived'] = true;
+        }
+        else{
+            $data['archived'] = false;
+        }
+
         $championship->update($data);
 
         return view('championship.show', compact('championship'));

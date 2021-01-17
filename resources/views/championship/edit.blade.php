@@ -23,8 +23,9 @@
             <!-- Championship desc text field -->
             <div class="form-group">
                 <label class="form-control-label" for="desc">Descrizione campionato:</label>
-                <input id="desc" name="desc" class="form-control @error('desc') is-invalid @enderror" type="text"
-                    placeholder="Nome campionato" value="{{ old('desc') ?? $championship->desc}}">
+                <textarea class="form-control @error('desc') is-invalid @enderror" id="exampleTextarea" rows="3"
+                    name="desc" placeholder="Descrizione campionato"
+                    style="margin-top: 0px; margin-bottom: 0px; height: 82px;">{{ old('desc') ?? $championship->desc}}</textarea>
                 @error('desc')
                 <div class="invalid-feedback">{{$errors->first('desc')}}</div>
                 @enderror
@@ -40,10 +41,11 @@
             </div>
             <!-- Championship archive checkbox -->
             <div class="form-group">
-                <div class="form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value="" checked>
-                        Option one is this and that—be sure to include why it's great
+                <div class="form-control-label">
+                    Archivia il campionato:
+                    <input id="archived" name="archived" class="ml-1" type="checkbox"
+                        @if($championship->archived) checked @endif>
+                    <label class="form-check-label" for="archived">
                     </label>
                 </div>
                 @error('date')

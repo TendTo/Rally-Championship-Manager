@@ -1,11 +1,11 @@
 @extends('layouts.base')
 
-@section('title', "Lista di campionati")
+@section('title', "Lista di campionati archiviati")
 
 @section('content')
 <div class="jumbotron mt-3">
-    <h1 class="display-5">Lista dei campionati</h1>
-    <p class="lead">Crea un nuovo campionato specificandone il nome e la data un cui si terrà.</p>
+    <h1 class="display-5">Lista dei campionati archiviati</h1>
+    <p class="lead">Questi sono tutti i campionati precedentemente archiviati. Puoi ancora modificarli e vedere i loro dati.</p>
     <hr class="my-4">
     <ul class="list-group">
         <!-- List of items -->
@@ -19,11 +19,9 @@
         </li>
         @endforeach
     </ul>
+    <!-- Back button -->
     <div class="modal-footer">
-        <!-- Archived button -->
-        <a href="/championship/archived"><i class="btn btn-primary fa fa-lock"></i></a>
-        <!-- Add button -->
-        <a href="/championship/create"><i class="btn btn-primary fa fa-plus"></i></a>
+        <a href="/championship"><i class="btn btn-primary fa fa-arrow-left"></i></a>
     </div>
 </div>
 
