@@ -22,7 +22,7 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            'id'=> $this->faker->unique()->countryCode,
+            'country_code'=> $this->faker->unique()->countryCode,
         ];
     }
 }
