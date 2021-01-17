@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ChampionshipController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +22,14 @@ Route::get(
     }
 );
 
-
+/**
+ * Championship routes
+ */
 Route::get('/championship/archived', [ChampionshipController::class, 'index_archived']);
 Route::resource('championship', ChampionshipController::class);
+
+/**
+ * Location routes
+ */
+Route::get('location', [LocationController::class, 'index']);
+Route::get('location/{id}', [LocationController::class, 'show']);
