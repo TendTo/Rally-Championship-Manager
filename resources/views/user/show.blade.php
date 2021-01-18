@@ -15,7 +15,7 @@
                         class="ml-2 mb-2 flag-icon flag-icon-{{strtolower($user->location->country_code)}} flag-icon-squared"></span>
                 </div>
                 <h6 class="card-subtitle mb-2 text-muted">
-                    {{Carbon\Carbon::parse($user->birthdate)->format('d/m/Y')}}
+                    {{Carbon\Carbon::parse($user->birthday)->format('d/m/Y')}}
                 </h6>
                 <hr>
                 <p class="card-text">{{$user->desc}}</p>
@@ -32,6 +32,7 @@
                         <div class="btn">
                             <a href="/user" class="card-link"><i class="fa fa-arrow-left"></i></a>
                         </div>
+                        @can('update', $user)
                         <!-- Edit button -->
                         <div class="btn">
                             <a href="/user/{{$user->id}}/edit" class="card-link"><i class="fa fa-pencil"></i></a>
@@ -41,6 +42,7 @@
                             onclick="return confirm('Tutti i dati associati a questo utente verranno rimossi.\nProcedere comunque?')">
                             <a class="card-link"><i class="fa fa-trash"></i></a>
                         </button>
+                        @endcan
                     </form>
                 </div>
             </div>

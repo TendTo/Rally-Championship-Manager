@@ -56,9 +56,8 @@ class RallyController extends Controller
             Rally::get_validation_create($championship)
         );
         
-        $location = Location::find(1)->where('country_code', '=', $data['location'])->first();
         $data['championship_id'] = $championship->id;
-        $data['location_id'] = $location->id;
+        $data['location_id'] = Location::get_location_id($data['country_code']);
 
         Rally::create($data);
 
@@ -104,9 +103,8 @@ class RallyController extends Controller
             $rally->get_validation_update($championship)
         );
         
-        $location = Location::find(1)->where('country_code', '=', $data['location'])->first();
         $data['championship_id'] = $championship->id;
-        $data['location_id'] = $location->id;
+        $data['location_id'] = Location::get_location_id($data['country_code']);
 
         $rally->update($data);
 

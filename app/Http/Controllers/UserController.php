@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -36,6 +37,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
+
         return view('user.show', compact('user'));
     }
 
@@ -47,7 +50,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        $locations = Location::all();
+        return view('user.edit', compact('user', 'locations'));
     }
 
     /**
@@ -59,7 +65,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        $data = $request->validate(
+            $user->get_validation_update()
+        );
+        $data['location_id'] = Location::get_location_id($data['country_code']);
+
+        $user->update($data);
+        return redirect('user/'.$user->id);
     }
 
     /**
@@ -70,6 +84,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->authorize('delete', $user);
+        $user->delete();
+        return redirect('user');
     }
 }

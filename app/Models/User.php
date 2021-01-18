@@ -11,6 +11,18 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function get_validation_update():array
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->id],
+            'birthday' => ['required', 'date', 'before:today'],
+            'country_code' => ['required', 'exists:locations,country_code'],
+        ];
+    }
+    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,7 +56,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function location(){
+    public function location()
+    {
         return $this->belongsTo(Location::class);
     }
 }
