@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\ChampionshipController;
 use App\Http\Controllers\RallyController;
 use App\Http\Controllers\LocationController;
@@ -19,9 +21,16 @@ use App\Http\Controllers\LocationController;
 
 Route::get(
     '/', function () {
-        return view('welcome');
+        return redirect('/championship');
     }
 );
+
+/**
+ * Auth routes
+ */
+Auth::routes();
+
+//Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 /**
  * Championship routes

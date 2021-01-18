@@ -1,9 +1,9 @@
-@extends('layouts.base')
+@extends('layouts.app')
 
 @section('title', "Modifica il campionato")
 
 @section('content')
-<div class="jumbotron mt-3">
+<div class="jumbotron m-5">
     <h1 class="display-5">Modifica il campionato!</h1>
     <p class="lead">Modifica il campionato selezionato a piacimento.</p>
     <hr class="my-4">

@@ -1,9 +1,9 @@
-@extends('layouts.base')
+@extends('layouts.app')
 
 @section('title', "Crea un campionato")
 
 @section('content')
-<div class="jumbotron mt-3">
+<div class="jumbotron m-5">
     <h1 class="display-5">Crea un nuovo campionato!</h1>
     <p class="lead">Crea un nuovo campionato specificandone il nome e la data un cui si terrà.</p>
     <hr class="my-4">
