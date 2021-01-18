@@ -21,7 +21,7 @@ class Rally extends Model
             }
         )],
         'desc' => '',
-        'location' => ["required", "string"],
+        'location' => ["required", "exists:locations,country_code"],
         ];
     }
 
@@ -34,7 +34,7 @@ class Rally extends Model
             }
         )->ignore($this->id)],
         'desc' => '',
-        'location' => ["required", "string"],
+        'location' => ["required", "exists:locations,country_code"],
         ];
     }
 
