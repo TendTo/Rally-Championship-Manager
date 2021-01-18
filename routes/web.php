@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ChampionshipController;
+use App\Http\Controllers\RallyController;
 use App\Http\Controllers\LocationController;
 
 /*
@@ -33,3 +34,8 @@ Route::resource('championship', ChampionshipController::class);
  */
 Route::get('location', [LocationController::class, 'index']);
 Route::get('location/{id}', [LocationController::class, 'show']);
+
+/**
+ * Rally routes
+ */
+Route::resource('championship.rally', RallyController::class);

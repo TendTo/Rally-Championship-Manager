@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Championship;
+use App\Models\Rally;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ChampionshipFactory extends Factory
+class RallyFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Championship::class;
+    protected $model = Rally::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,8 @@ class ChampionshipFactory extends Factory
     public function definition()
     {
         return [
-            'name'=> "Campionato ".$this->faker->unique()->name,
+            'name' => "Rally ".$this->faker->name,
             'desc'=>$this->faker->realText,
-            'date'=>$this->faker->date,
         ];
     }
 }

@@ -1,38 +1,37 @@
 @extends('layouts.base')
 
 @section('title')
-{{$championship->name}}
+{{$rally->name}}
 @endsection
 
 @section('content')
 <div class="card mt-3">
     <div class="card-body">
-        <h4 class="card-title">{{$championship->name}}</h4>
-        <h6 class="card-subtitle mb-2 text-muted">{{$championship->date}}</h6>
-        <p class="card-text">{{$championship->desc}}</p>
+        <h4 class="card-title">{{$rally->name}}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{$rally->location->country_code}}</h6>
+        <p class="card-text">{{$rally->desc}}</p>
         <div>
-            <a href="/championship/{{$championship->id}}/rally" class="card-link">Rally <i class="fa fa-car"></i></a>
-            <a href="#" class="card-link">Partecipanti <i class="fa fa-users"></i></a>
+            <a href="/championship/{{$championship->id}}/rally" class="card-link">Prove <i class="fa fa-car"></i></a>
             <a href="#" class="card-link">Classifica <i class="fa fa-flag-checkered"></i></a>
         </div>
         <hr>
         <div>
-            <form class="form-group" action="/championship/{{$championship->id}}" method="POST">
+            <form class="form-group" action="/championship/{{$championship->id}}/rally/{{$rally->id}}" method="POST">
                 @csrf
                 @method('DELETE')
                 <!-- Back button -->
                 <div class="btn">
-                    <a href="/championship" class="card-link"><i class="fa fa-arrow-left"></i></a>
+                    <a href="/championship/{{$championship->id}}/rally" class="card-link"><i class="fa fa-arrow-left"></i></a>
                 </div>
                 <!-- Edit button -->
                 <div class="btn">
-                    <a href="/championship/{{$championship->id}}/edit" class="card-link"><i
+                    <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}/edit" class="card-link"><i
                             class="fa fa-pencil"></i></a>
                 </div>
                 <!-- Delete button -->
                 <button class="btn" type="submit" value=""
                     onclick="return confirm('Tutti i dati associati a questo campionati verranno rimossi.\nProcedere comunque?')">
-                    <a class="card-link"><i class="fa fa-trash "></i></a>
+                    <a class="card-link"><i class="fa fa-trash"></i></a>
                 </button>
             </form>
         </div>

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Rally;
+
 class Championship extends Model
 {
     use HasFactory;
@@ -38,4 +40,9 @@ class Championship extends Model
         'date',
         'archived',
     ];
+
+    public function rallies()
+    {
+        return $this->hasMany(Rally::class);
+    }
 }
