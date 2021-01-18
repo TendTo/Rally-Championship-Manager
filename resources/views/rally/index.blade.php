@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="jumbotron col-md-12">
-            <h1 class="display-5"><strong>{{$championship->name}} |</strong> {{__('Rallies\' list')}} </h1>
+            <h1 class="display-5"><strong>{{$championship->name}} |</strong> {{__('Rallies\' list')}}</h1>
             <hr class="my-4">
             <ul class="list-group">
                 <!-- List of items -->

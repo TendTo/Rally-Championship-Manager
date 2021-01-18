@@ -12,9 +12,9 @@
                 <!-- List of items -->
                 @foreach ($collection as $item)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <a href="/user/{{$item->id}}" class="list-group-item-action pl-3">
+                    <a href="/user/{{$item->id}}" class="list-group-item-action pl-3 row">
                         <h5>{{$item->name}} {{$item->surname}}</h5>
-                        <div class="text-muted">{{$item->location->country_code}}</div>
+                        <span class="ml-2 mb-2 flag-icon flag-icon-{{strtolower($item->location->country_code)}} flag-icon-squared">
                     </a>
                 </li>
                 @endforeach

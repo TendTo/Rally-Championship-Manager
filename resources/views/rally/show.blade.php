@@ -10,7 +10,9 @@
         <div class="card col-md-12">
             <div class="card-body">
                 <h4 class="card-title">{{$rally->name}}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">{{$rally->location->country_code}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{$rally->location->country_code}}
+                    <span class="flag-icon flag-icon-{{strtolower($rally->location->country_code)}} flag-icon-squared"></span>
+                </h6>
                 <hr>
                 <p class="card-text">{{$rally->desc}}</p>
                 <div>

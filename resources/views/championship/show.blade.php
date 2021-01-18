@@ -10,7 +10,7 @@
         <div class="card col-md-12">
             <div class="card-body">
                 <h4 class="card-title">{{$championship->name}}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">{{$championship->date}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{Carbon\Carbon::parse($championship->date)->format('d/m/Y')}}</h6>
                 <hr>
                 <p class="card-text">{{$championship->desc}}</p>
                 <div>

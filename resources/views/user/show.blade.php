@@ -9,13 +9,18 @@
     <div class="row justify-content-center">
         <div class="card col-md-12">
             <div class="card-body">
-                <h4 class="card-title">{{$user->name}} {{$user->surname}}</h4>
-                <h6 class="card-subtitle mb-2 text-muted">{{$user->location->country_code}}</h6>
+                <div class="row">
+                    <h4 class="card-title">{{$user->name}} {{$user->surname}}</h4>
+                    <span
+                        class="ml-2 mb-2 flag-icon flag-icon-{{strtolower($user->location->country_code)}} flag-icon-squared"></span>
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    {{Carbon\Carbon::parse($user->birthdate)->format('d/m/Y')}}
+                </h6>
                 <hr>
                 <p class="card-text">{{$user->desc}}</p>
                 <div>
-                    <a href="/championship/" class="card-link">{{__('Stages')}} <i
-                            class="fa fa-car"></i></a>
+                    <a href="/championship/" class="card-link">{{__('Stages')}} <i class="fa fa-car"></i></a>
                     <a href="#" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
                 </div>
                 <hr>
