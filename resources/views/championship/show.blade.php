@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="card">
+        <div class="card col-md-12">
             <div class="card-body">
                 <h4 class="card-title">{{$championship->name}}</h4>
                 <h6 class="card-subtitle mb-2 text-muted">{{$championship->date}}</h6>

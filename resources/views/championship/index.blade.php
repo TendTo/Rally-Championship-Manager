@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="jumbotron">
+        <div class="jumbotron col-md-12">
             <h1 class="display-5">{{__('Championships\' list')}}</h1>
             <hr class="my-4">
             <ul class="list-group">

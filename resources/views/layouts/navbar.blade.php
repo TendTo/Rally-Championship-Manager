@@ -17,7 +17,7 @@
           <a class="nav-link" href="/championship">Campionati</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Piloti</a>
+          <a class="nav-link" href="/user">Piloti</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Vetture</a>

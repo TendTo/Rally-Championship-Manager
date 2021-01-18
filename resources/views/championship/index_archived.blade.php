@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="jumbotron">
+        <div class="jumbotron col-md-12">
             <h1 class="display-5">{{__('Archived championships')}}</h1>
             <p class="lead">{{__('These championships have been archived. You can still edit them.')}}</p>
             <hr class="my-4">
