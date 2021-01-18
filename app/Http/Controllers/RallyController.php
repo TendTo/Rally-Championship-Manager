@@ -62,8 +62,7 @@ class RallyController extends Controller
 
         Rally::create($data);
 
-        $collection = $championship->rallies;
-        return view('rally.index', compact('championship', 'collection'));
+        return redirect('championship/'.$championship->id.'/rally');
     }
 
     /**
@@ -111,7 +110,7 @@ class RallyController extends Controller
 
         $rally->update($data);
 
-        return view('rally.show', compact('championship', 'rally'));
+        return redirect('championship/'.$championship->id.'/rally/'.$rally->id);
     }
 
     /**
@@ -125,7 +124,6 @@ class RallyController extends Controller
     {
         $rally->delete();
 
-        $collection = $championship->rallies;
-        return view("rally.index", compact('championship', 'collection'));
+        return redirect('championship/'.$championship->id.'/rally');
     }
 }

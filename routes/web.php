@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ChampionshipController;
 use App\Http\Controllers\RallyController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -54,3 +55,8 @@ Route::resource('championship.rally', RallyController::class);
  * User routes
  */
 Route::resource('user', UserController::class);
+
+/**
+ * Car routes
+ */
+Route::resource('car', CarController::class);

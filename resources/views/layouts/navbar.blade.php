@@ -20,7 +20,7 @@
           <a class="nav-link" href="/user">Piloti</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Vetture</a>
+          <a class="nav-link" href="/car">Vetture</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>

@@ -62,8 +62,7 @@ class ChampionshipController extends Controller
         );
         Championship::create($data);
 
-        $collection = Championship::all();
-        return view('championship.index', compact('collection'));
+        return redirect('championship');
     }
 
     /**
@@ -110,7 +109,7 @@ class ChampionshipController extends Controller
 
         $championship->update($data);
 
-        return view('championship.show', compact('championship'));
+        return redirect('championship/'.$championship->id);
     }
 
     /**
@@ -123,7 +122,6 @@ class ChampionshipController extends Controller
     {
         $championship->delete();
 
-        $collection = Championship::all();
-        return view("championship.index", compact('collection'));
+        return redirect('championship');
     }
 }
