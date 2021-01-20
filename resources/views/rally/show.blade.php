@@ -31,6 +31,7 @@
                             <a href="/championship/{{$championship->id}}/rally" class="card-link"><i
                                     class="fa fa-arrow-left"></i></a>
                         </div>
+                        @can('update', $championship)
                         <!-- Edit button -->
                         <div class="btn">
                             <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}/edit" class="card-link"><i
@@ -41,6 +42,7 @@
                             onclick="return confirm('Tutti i dati associati a questo campionati verranno rimossi.\nProcedere comunque?')">
                             <a class="card-link"><i class="fa fa-trash"></i></a>
                         </button>
+                        @endcan
                     </form>
                 </div>
             </div>

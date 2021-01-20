@@ -53,7 +53,13 @@ class ChampionshipPolicy
      */
     public function update(User $user, Championship $championship)
     {
-        //
+        //TODO: could be better with an SQL Exists participant where ch_id = ch.id and is_admin = true and user_id = user.id
+        foreach ($championship->participants as $participant) {
+            if($participant->is_admin && $participant->user->id == $user->id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -65,7 +71,12 @@ class ChampionshipPolicy
      */
     public function delete(User $user, Championship $championship)
     {
-        //
+        foreach ($championship->participants as $participant) {
+            if($participant->is_admin && $participant->user->id == $user->id) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

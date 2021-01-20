@@ -39,6 +39,7 @@ class RallyController extends Controller
      */
     public function create(Championship $championship)
     {
+        $this->authorize('update', $championship);
         $locations = Location::all();
         return view('rally.create', compact('championship', 'locations'));
     }
@@ -52,12 +53,12 @@ class RallyController extends Controller
      */
     public function store(Request $request, Championship $championship)
     {
+        $this->authorize('update', $championship);
         $data = $request->validate(
             Rally::get_validation_create($championship)
         );
         
         $data['championship_id'] = $championship->id;
-        $data['location_id'] = Location::get_location_id($data['country_code']);
 
         Rally::create($data);
 
@@ -85,6 +86,7 @@ class RallyController extends Controller
      */
     public function edit(Championship $championship, Rally $rally)
     {
+        $this->authorize('update', $championship);
         $locations = Location::all();
         return view('rally.edit', compact('championship', 'rally', 'locations'));
     }
@@ -99,12 +101,12 @@ class RallyController extends Controller
      */
     public function update(Request $request, Championship $championship, Rally $rally)
     {
+        $this->authorize('update', $championship);
         $data = $request->validate(
             $rally->get_validation_update($championship)
         );
         
         $data['championship_id'] = $championship->id;
-        $data['location_id'] = Location::get_location_id($data['country_code']);
 
         $rally->update($data);
 
@@ -120,6 +122,7 @@ class RallyController extends Controller
      */
     public function destroy(Championship $championship, Rally $rally)
     {
+        $this->authorize('update', $championship);
         $rally->delete();
 
         return redirect('championship/'.$championship->id.'/rally');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Championship;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 
 class ChampionshipController extends Controller
@@ -60,7 +61,14 @@ class ChampionshipController extends Controller
         $data = $request->validate(
             Championship::get_validation_create()
         );
-        Championship::create($data);
+        $new_championship = Championship::create($data);
+
+        $participant_data = [
+            'user_id' => auth()->id(),
+            'championship_id' => $new_championship->id,
+            'is_admin' => true,
+        ];
+        Participant::create($participant_data);
 
         return redirect('championship');
     }
@@ -84,6 +92,7 @@ class ChampionshipController extends Controller
      */
     public function edit(Championship $championship)
     {
+        $this->authorize('update', $championship);
         return view('championship.edit', compact('championship'));
     }
 
@@ -96,6 +105,8 @@ class ChampionshipController extends Controller
      */
     public function update(Request $request, Championship $championship)
     {
+        $this->authorize('update', $championship);
+
         $data = $request->validate(
             $championship->get_validation_update()
         );
@@ -108,7 +119,6 @@ class ChampionshipController extends Controller
         }
 
         $championship->update($data);
-
         return redirect('championship/'.$championship->id);
     }
 
@@ -120,8 +130,9 @@ class ChampionshipController extends Controller
      */
     public function destroy(Championship $championship)
     {
-        $championship->delete();
+        $this->authorize('delete', $championship);
 
+        $championship->delete();
         return redirect('championship');
     }
 }

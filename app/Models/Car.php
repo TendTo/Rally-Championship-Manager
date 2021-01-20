@@ -37,4 +37,9 @@ class Car extends Model
         'constructor',
         'category',
     ];
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
 }

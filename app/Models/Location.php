@@ -13,4 +13,14 @@ class Location extends Model
     {
         return self::find(1)->where('country_code', '=', $country_code)->first()->id;
     }
+
+    public function rallies()
+    {
+        return $this->hasMany(Rally::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
