@@ -62,7 +62,7 @@ class RallyController extends Controller
 
         Rally::create($data);
 
-        return redirect('championship/'.$championship->id.'/rally');
+        return redirect('championship/'.$championship->id);
     }
 
     /**
@@ -125,6 +125,6 @@ class RallyController extends Controller
         $this->authorize('update', $championship);
         $rally->delete();
 
-        return redirect('championship/'.$championship->id.'/rally');
+        return redirect('championship/'.$championship->id);
     }
 }

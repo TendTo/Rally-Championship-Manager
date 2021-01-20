@@ -71,7 +71,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <!-- Back button -->
-                                <a href="/championship/{{$championship->id}}/rally" class="btn btn-primary mr-3"><i
+                                <a href="/championship/{{$championship->id}}" class="btn btn-primary mr-3"><i
                                         class="fa fa-arrow-left"></i></a>
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary">

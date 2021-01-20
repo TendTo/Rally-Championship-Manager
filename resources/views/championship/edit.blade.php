@@ -2,6 +2,12 @@
 
 @section('title', "Modifica il campionato")
 
+<!-- Forms -->
+<form id="deleteForm" action="/championship/{{$championship->id}}" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -75,7 +81,15 @@
                                 <a href="/championship/{{$championship->id}}" class="btn btn-primary btn-lg mr-3"><i
                                         class="fa fa-arrow-left"></i></a>
                                 <!-- Submit button -->
-                                <input class="btn btn-primary btn-lg" type="submit" value="Salva modifiche">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Save changes') }}
+                                </button>
+                                @can('delete', $championship)
+                                <!-- Delete button -->
+                                <button class="btn btn-danger btn-lg offset-md-3" type="submit" form="deleteForm"
+                                    onclick="return confirm('Tutti i tuoi dati verranno rimossi.\nProcedere comunque?')"><i
+                                        class="fa fa-trash"></i></button>
+                                @endcan
                             </div>
                         </div>
                     </form>

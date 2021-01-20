@@ -2,6 +2,12 @@
 
 @section('title', "Modifica il rally")
 
+<!-- Forms -->
+<form id="deleteForm" action="/championship/{{$championship->id}}/rally/{{$rally->id}}" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -72,12 +78,18 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <!-- Back button -->
-                                <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}" class="btn btn-primary mr-3"><i
-                                        class="fa fa-arrow-left"></i></a>
+                                <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}"
+                                    class="btn btn-primary mr-3"><i class="fa fa-arrow-left"></i></a>
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Edit') }}
+                                    {{ __('Save changes') }}
                                 </button>
+                                <!-- Delete button -->
+                                @can('delete', $championship)
+                                <button class="btn btn-danger btn-lg offset-md-3" type="submit" form="deleteForm"
+                                    onclick="return confirm('Tutti i dati di questo rally verranno rimossi.\nProcedere comunque?')"><i
+                                        class="fa fa-trash"></i></button>
+                                @endcan
                             </div>
                         </div>
                     </form>
