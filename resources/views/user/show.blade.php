@@ -4,6 +4,12 @@
 {{$user->name}}
 @endsection
 
+<!-- Forms -->
+<form id="deleteForm" class="form-group" action="/user/{{$user->id}}" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -25,25 +31,23 @@
                 </div>
                 <hr>
                 <div>
-                    <form class="form-group" action="/user/{{$user->id}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <!-- Back button -->
-                        <div class="btn">
-                            <a href="/user" class="card-link"><i class="fa fa-arrow-left"></i></a>
-                        </div>
-                        @can('update', $user)
-                        <!-- Edit button -->
-                        <div class="btn">
-                            <a href="/user/{{$user->id}}/edit" class="card-link"><i class="fa fa-pencil"></i></a>
-                        </div>
-                        <!-- Delete button -->
-                        <button class="btn" type="submit" value=""
-                            onclick="return confirm('Tutti i dati associati a questo utente verranno rimossi.\nProcedere comunque?')">
-                            <a class="card-link"><i class="fa fa-trash"></i></a>
-                        </button>
-                        @endcan
-                    </form>
+                    <!-- Back button -->
+                    <div class="btn">
+                        <a href="/user" class="card-link"><i class="fa fa-arrow-left"></i></a>
+                    </div>
+                    @can('update', $user)
+                    <!-- Edit button -->
+                    <div class="btn">
+                        <a href="/user/{{$user->id}}/edit" class="card-link"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    @endcan
+                    @can('delete', $user)
+                    <!-- Delete button -->
+                    <button class="btn" type="submit" value="" form="deleteForm"
+                        onclick="return confirm('Tutti i dati associati a questo utente verranno rimossi.\nProcedere comunque?')">
+                        <a class="card-link"><i class="fa fa-trash"></i></a>
+                    </button>
+                    @endcan
                 </div>
             </div>
         </div>

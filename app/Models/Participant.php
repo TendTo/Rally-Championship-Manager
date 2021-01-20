@@ -9,6 +9,13 @@ class Participant extends Model
 {
     use HasFactory;
 
+    public static function get_validation_create():array
+    {
+        return [
+            'car_id' => ['required', 'exists:cars,id'],
+        ];
+    }
+
     public function get_validation_update():array
     {
         return [

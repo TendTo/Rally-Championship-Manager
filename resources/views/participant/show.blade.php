@@ -4,7 +4,23 @@
 {{$participant->user->name}}
 @endsection
 
+<!-- Forms -->
 @section('content')
+<form id="upgradeForm" action="/championship/{{$championship->id}}/participant/{{$participant->id}}/upgrade"
+    method="POST">
+    @method('PATCH')
+    @csrf
+</form>
+<form id="downgradeForm" action="/championship/{{$championship->id}}/participant/{{$participant->id}}/downgrade"
+    method="POST">
+    @method('PATCH')
+    @csrf
+</form>
+<form id="deleteForm" action="/championship/{{$championship->id}}/participant/{{$participant->id}}" method="POST">
+    @csrf
+    @method('DELETE')
+</form>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="card col-md-12">
@@ -25,30 +41,37 @@
                 </div>
                 <hr>
                 <div>
-                    <form class="form-group"
-                        action="/championship/{{$championship->id}}/participant/{{$participant->id}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <!-- Back button -->
-                        <div class="btn">
-                            <a href="/championship/{{$championship->id}}/participant" class="card-link"><i
-                                    class="fa fa-arrow-left"></i></a>
-                        </div>
-                        @can('update', $participant)
-                        <!-- Edit button -->
-                        <div class="btn">
-                            <a href="/championship/{{$championship->id}}/participant/{{$participant->id}}/edit"
-                                class="card-link"><i class="fa fa-pencil"></i></a>
-                        </div>
-                        @endcan
-                        @can('delete', $participant)
-                        <!-- Delete button -->
-                        <button class="btn" type="submit" value=""
-                            onclick="return confirm('Tutti i dati associati a questo utente verranno rimossi.\nProcedere comunque?')">
-                            <a class="card-link"><i class="fa fa-trash"></i></a>
-                        </button>
-                        @endcan
-                    </form>
+                    <!-- Back button -->
+                    <div class="btn">
+                        <a href="/championship/{{$championship->id}}/participant" class="card-link"><i
+                                class="fa fa-arrow-left"></i></a>
+                    </div>
+                    @can('update', $participant)
+                    <!-- Edit button -->
+                    <div class="btn">
+                        <a href="/championship/{{$championship->id}}/participant/{{$participant->id}}/edit"
+                            class="card-link"><i class="fa fa-pencil"></i></a>
+                    </div>
+                    @endcan
+                    @can('upgrade', $participant)
+                    <!-- Upgrade button -->
+                    <button class="btn" type="submit" form="upgradeForm"
+                        onclick="return confirm('Il partecipante otterrà lo stato di admin')"><a class="card-link"><i
+                                class="fa fa-arrow-up"></i></a></button>
+                    @endcan
+                    @can('downgrade', $participant)
+                    <!-- Downgrade button -->
+                    <button class="btn" type="submit" form="downgradeForm"
+                        onclick="return confirm('Il partecipante perderà il suo stato di admin')"><a
+                            class="card-link"><i class="fa fa-arrow-down"></i></a></button>
+                    @endcan
+                    @can('delete', $participant)
+                    <!-- Delete button -->
+                    <button class="btn" type="submit" value="" form="deleteForm"
+                        onclick="return confirm('Tutti i dati associati a questo utente verranno rimossi.\nProcedere comunque?')">
+                        <a class="card-link"><i class="fa fa-trash"></i></a>
+                    </button>
+                    @endcan
                 </div>
             </div>
         </div>

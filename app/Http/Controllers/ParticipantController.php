@@ -39,7 +39,10 @@ class ParticipantController extends Controller
      */
     public function create(Championship $championship)
     {
-        //
+        $this->authorize('participate', $championship);
+
+        $cars = Car::all();
+        return view('participant.create', compact('championship', 'cars'));
     }
 
     /**
@@ -51,7 +54,18 @@ class ParticipantController extends Controller
      */
     public function store(Championship $championship, Request $request)
     {
-        //
+        $this->authorize('participate', $championship);
+        $car_id = $request->validate(
+            Participant::get_validation_create()
+        );
+        $data = [
+            'user_id' => auth()->id(),
+            'championship_id' => $championship->id,
+        ];
+        $data = array_merge($data, $car_id);
+
+        Participant::create($data);
+        return \redirect('championship/'.$championship->id.'/participant');
     }
 
     /**
@@ -64,6 +78,36 @@ class ParticipantController extends Controller
     public function show(Championship $championship, Participant $participant)
     {
         return view('participant.show', compact('championship', 'participant'));
+    }
+
+    /**
+     * Set the participant as a new admin.
+     *
+     * @param  \App\Models\Championship $championship
+     * @param  \App\Models\Participant  $participant
+     * @return \Illuminate\Http\Response
+     */
+    public function upgrade(Championship $championship, Participant $participant)
+    {
+        $this->authorize('upgrade', $participant);
+
+        $participant->update(['is_admin'=>true]);
+        return redirect('championship/'.$championship->id.'/participant/'.$participant->id);
+    }
+
+    /**
+     * Remove the admin status from the participant.
+     *
+     * @param  \App\Models\Championship $championship
+     * @param  \App\Models\Participant  $participant
+     * @return \Illuminate\Http\Response
+     */
+    public function downgrade(Championship $championship, Participant $participant)
+    {
+        $this->authorize('downgrade', $participant);
+
+        $participant->update(['is_admin'=>false]);
+        return redirect('championship/'.$championship->id.'/participant/'.$participant->id);
     }
 
     /**

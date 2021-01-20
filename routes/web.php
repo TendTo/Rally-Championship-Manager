@@ -65,4 +65,6 @@ Route::resource('car', CarController::class);
 /**
  * Participant routes
  */
+Route::patch('/championship/{championship}/participant/{participant}/upgrade', [ParticipantController::class, 'upgrade']);
+Route::patch('/championship/{championship}/participant/{participant}/downgrade', [ParticipantController::class, 'downgrade']);
 Route::resource('championship.participant', ParticipantController::class);

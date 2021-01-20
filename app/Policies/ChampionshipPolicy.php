@@ -44,6 +44,18 @@ class ChampionshipPolicy
         //
     }
 
+        /**
+         * Determine whether the user can partecipate to the championship.
+         *
+         * @param  \App\Models\User         $user
+         * @param  \App\Models\Championship $championship
+         * @return mixed
+         */
+    public function participate(User $user, Championship $championship)
+    {
+        return $championship->participants()->where('user_id', '=', $user->id)->count() == 0;
+    }
+
     /**
      * Determine whether the user can update the model.
      *
@@ -53,13 +65,7 @@ class ChampionshipPolicy
      */
     public function update(User $user, Championship $championship)
     {
-        //TODO: could be better with an SQL Exists participant where ch_id = ch.id and is_admin = true and user_id = user.id
-        foreach ($championship->participants as $participant) {
-            if($participant->is_admin && $participant->user->id == $user->id) {
-                return true;
-            }
-        }
-        return false;
+        return $championship->participants()->where('user_id', '=', $user->id)->where('is_admin', '=', true)->count() == 1;
     }
 
     /**
@@ -71,12 +77,7 @@ class ChampionshipPolicy
      */
     public function delete(User $user, Championship $championship)
     {
-        foreach ($championship->participants as $participant) {
-            if($participant->is_admin && $participant->user->id == $user->id) {
-                return true;
-            }
-        }
-        return false;
+        return $championship->participants()->where('user_id', '=', $user->id)->where('is_admin', '=', true)->count() == 1;
     }
 
     /**

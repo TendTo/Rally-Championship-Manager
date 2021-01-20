@@ -24,9 +24,11 @@
             <div class="modal-footer">
                 <!-- Back button -->
                 <a href="/championship/{{$championship->id}}"><i class="btn btn-primary fa fa-arrow-left"></i></a>
+                @can('participate', $championship)
                 <!-- Add button -->
                 <a href="/championship/{{$championship->id}}/participant/create"><i
                         class="btn btn-primary fa fa-plus"></i></a>
+                @endcan
             </div>
         </div>
     </div>
