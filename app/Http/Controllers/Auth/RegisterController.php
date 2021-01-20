@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'birthday' => ['required', 'date', 'before:today'],
-            'country_code' => ['required', 'exists:locations,country_code'],
+            'location_id' => ['required', 'exists:locations,id'],
             ]
         );
     }
@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'birthday' =>  $data['birthday'],
-            'location_id' => Location::first()->where('country_code', '=', $data['country_code'])->first()->id,
+            'location_id' => $data['location_id'],
             ]
         );
     }

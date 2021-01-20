@@ -17,6 +17,7 @@ class CreateChampionshipsTable extends Migration
             'championships', function (Blueprint $table) {
                 $table->id();
                 $table->timestamps();
+
                 $table->string('name')->unique();
                 $table->text('desc')->nullable();
                 $table->date('date');

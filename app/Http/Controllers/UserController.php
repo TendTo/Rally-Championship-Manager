@@ -70,7 +70,6 @@ class UserController extends Controller
         $data = $request->validate(
             $user->get_validation_update()
         );
-        $data['location_id'] = Location::get_location_id($data['country_code']);
 
         $user->update($data);
         return redirect('user/'.$user->id);

@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 
-use App\Models\Championship;
-
 class Rally extends Model
 {
     use HasFactory;
@@ -21,7 +19,7 @@ class Rally extends Model
             }
         )],
         'desc' => '',
-        'location' => ["required", "exists:locations,country_code"],
+        'location_id' => ["required", "exists:locations,id"],
         ];
     }
 
@@ -34,7 +32,7 @@ class Rally extends Model
             }
         )->ignore($this->id)],
         'desc' => '',
-        'location' => ["required", "exists:locations,country_code"],
+        'location_id' => ["required", "exists:locations,id"],
         ];
     }
 

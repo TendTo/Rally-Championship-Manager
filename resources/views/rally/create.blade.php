@@ -24,7 +24,7 @@
                                     type="text" placeholder="{{ __('Rally name') }}" value="{{ old('name')}}" required>
                                 @error('name')
                                 <div class="invalid-feedback">
-                                    <strong>{{$errors->first('name')}}</strong>
+                                    <strong>{{$message}}</strong>
                                 </div>
                                 @enderror
                             </div>
@@ -39,7 +39,7 @@
                                     rows="4">{{ old('desc')}}</textarea>
                                 @error('desc')
                                 <div class="invalid-feedback">
-                                    <strong>{{$errors->first('desc')}}</strong>
+                                    <strong>{{$message}}</strong>
                                 </div>
                                 @enderror
                             </div>
@@ -50,19 +50,19 @@
                             <label class="col-md-4 col-form-label text-md-right"
                                 for="name">{{ __('Rally name') }}</label>
                             <div class="col-md-6">
-                                <select id="location" name="location"
-                                    class="form-control @error('location') is-invalid @enderror">
+                                <select id="location_id" name="location_id"
+                                    class="form-control @error('location_id') is-invalid @enderror">
                                     <option value="">{{__('Select a location')}}</option>
                                     @foreach ($locations as $location)
-                                    <option value="{{ $location->country_code }}"
-                                        {{( old('location') == $location->country_code ? "selected":"") }}>
+                                    <option value="{{ $location->id }}"
+                                        {{( old('location_id') == $location->id ? "selected":"") }}>
                                         {{ $location->country_code }}
                                     </option>
                                     @endforeach
                                 </select>
-                                @error('location')
+                                @error('location_id')
                                 <div class="invalid-feedback">
-                                    <strong>{{$errors->first('location')}}</strong>
+                                    <strong>{{$message}}</strong>
                                 </div>
                                 @enderror
                             </div>

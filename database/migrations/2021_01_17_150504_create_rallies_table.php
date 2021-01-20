@@ -17,6 +17,7 @@ class CreateRalliesTable extends Migration
             'rallies', function (Blueprint $table) {
                 $table->id();
                 $table->timestamps();
+
                 $table->string('name');
                 $table->foreignId('championship_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete(); //foreing key to Championships table
                 $table->foreignId('location_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete(); //foreing key to Locations table

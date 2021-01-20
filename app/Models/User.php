@@ -18,7 +18,7 @@ class User extends Authenticatable
             'surname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->id],
             'birthday' => ['required', 'date', 'before:today'],
-            'country_code' => ['required', 'exists:locations,country_code'],
+            'location_id' => ['required', 'exists:locations,id'],
         ];
     }
     

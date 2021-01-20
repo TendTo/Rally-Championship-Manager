@@ -106,17 +106,17 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right" for="name">{{ __('Country') }}</label>
                             <div class="col-md-6">
-                                <select id="country_code" name="country_code"
-                                    class="form-control @error('country_code') is-invalid @enderror">
+                                <select id="location_id" name="location_id"
+                                    class="form-control @error('location_id') is-invalid @enderror">
                                     <option value="">{{__('Select a country')}}</option>
                                     @foreach ($locations as $location)
-                                    <option value="{{ $location->country_code }}"
-                                        {{( old('country_code') == $location->country_code ? "selected":"") }}>
+                                    <option value="{{ $location->id }}"
+                                        {{( old('location_id') == $location->id ? "selected":"") }}>
                                         {{ $location->country_code }}
                                     </option>
                                     @endforeach
                                 </select>
-                                @error('country_code')
+                                @error('location_id')
                                 <div class="invalid-feedback">
                                     <strong>{{$message}}</strong>
                                 </div>
