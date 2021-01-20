@@ -10,6 +10,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\StageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,3 +69,8 @@ Route::resource('car', CarController::class);
 Route::patch('/championship/{championship}/participant/{participant}/upgrade', [ParticipantController::class, 'upgrade']);
 Route::patch('/championship/{championship}/participant/{participant}/downgrade', [ParticipantController::class, 'downgrade']);
 Route::resource('championship.participant', ParticipantController::class);
+
+/**
+ * Stage routes
+ */
+Route::resource('championship.rally.stage', StageController::class);

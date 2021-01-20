@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stage;
 use App\Models\Rally;
 use App\Models\Championship;
-use App\Models\Location;
 use Illuminate\Http\Request;
 
-class RallyController extends Controller
+class StageController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,25 +23,26 @@ class RallyController extends Controller
      * Display a listing of the resource.
      *
      * @param  \App\Models\Championship $championship
+     * @param  \App\Models\Rally        $rally
      * @return \Illuminate\Http\Response
      */
-    public function index(Championship $championship)
+    public function index(Championship $championship, Rally $rally)
     {
-        $collection = $championship->rallies;
-        return view('rally.index', compact('championship', 'collection'));
+        $collection = $rally->stages;
+        return view('stage.index', compact('championship', 'rally', 'collection'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
      * @param  \App\Models\Championship $championship
+     * @param  \App\Models\Rally        $rally
      * @return \Illuminate\Http\Response
      */
-    public function create(Championship $championship)
+    public function create(Championship $championship, Rally $rally)
     {
         $this->authorize('update', $championship);
-        $locations = Location::all();
-        return view('rally.create', compact('championship', 'locations'));
+        return view('stage.create', compact('championship', 'rally'));
     }
 
     /**
@@ -49,20 +50,21 @@ class RallyController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Championship $championship
+     * @param  \App\Models\Rally        $rally
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Championship $championship)
+    public function store(Request $request, Championship $championship, Rally $rally)
     {
         $this->authorize('update', $championship);
         $data = $request->validate(
-            Rally::get_validation_create()
+            Stage::get_validation_create()
         );
         
-        $data['championship_id'] = $championship->id;
+        $data['rally_id'] = $rally->id;
 
-        Rally::create($data);
+        Stage::create($data);
 
-        return redirect('championship/'.$championship->id);
+        return redirect('championship/'.$championship->id.'/rally/'.$rally->id);
     }
 
     /**
@@ -70,11 +72,12 @@ class RallyController extends Controller
      *
      * @param  \App\Models\Championship $championship
      * @param  \App\Models\Rally        $rally
+     * @param  \App\Models\Stage        $stage
      * @return \Illuminate\Http\Response
      */
-    public function show(Championship $championship, Rally $rally)
+    public function show(Championship $championship, Rally $rally, Stage $stage)
     {
-        return view('rally.show', compact('championship', 'rally'));
+        return view('stage.show', compact('championship', 'rally', 'stage'));
     }
 
     /**
@@ -82,13 +85,13 @@ class RallyController extends Controller
      *
      * @param  \App\Models\Championship $championship
      * @param  \App\Models\Rally        $rally
+     * @param  \App\Models\Stage        $stage
      * @return \Illuminate\Http\Response
      */
-    public function edit(Championship $championship, Rally $rally)
+    public function edit(Championship $championship, Rally $rally, Stage $stage)
     {
         $this->authorize('update', $championship);
-        $locations = Location::all();
-        return view('rally.edit', compact('championship', 'rally', 'locations'));
+        return view('stage.edit', compact('championship', 'rally', 'stage'));
     }
 
     /**
@@ -97,20 +100,21 @@ class RallyController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Models\Championship $championship
      * @param  \App\Models\Rally        $rally
+     * @param  \App\Models\Stage        $stage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Championship $championship, Rally $rally)
+    public function update(Request $request, Championship $championship, Rally $rally, Stage $stage)
     {
         $this->authorize('update', $championship);
         $data = $request->validate(
-            $rally->get_validation_update()
+            $stage->get_validation_update()
         );
         
-        $data['championship_id'] = $championship->id;
+        $data['rally_id'] = $rally->id;
 
-        $rally->update($data);
+        $stage->update($data);
 
-        return redirect('championship/'.$championship->id.'/rally/'.$rally->id);
+        return redirect('championship/'.$championship->id.'/rally/'.$rally->id.'/stage/'.$stage->id);
     }
 
     /**
@@ -118,12 +122,13 @@ class RallyController extends Controller
      *
      * @param  \App\Models\Championship $championship
      * @param  \App\Models\Rally        $rally
+     * @param  \App\Models\Stage        $stage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Championship $championship, Rally $rally)
+    public function destroy(Championship $championship, Rally $rally, Stage $stage)
     {
         $this->authorize('update', $championship);
-        $rally->delete();
-        return redirect('championship/'.$championship->id);
+        $stage->delete();
+        return redirect('championship/'.$championship->id.'/rally/'.$rally->id);
     }
 }

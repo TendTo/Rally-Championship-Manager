@@ -10,12 +10,12 @@ class Rally extends Model
 {
     use HasFactory;
 
-    public static function get_validation_create(Championship $championship):array
+    public static function get_validation_create():array
     {
         return [
         'name' => ["required", "string", Rule::unique('rallies', 'name')->where(
             function ($query) {
-                return $query->where('championship_id', '=', \request('championship')->id);
+                return $query->where('championship_id', '=', request('championship')->id);
             }
         )],
         'desc' => '',
@@ -56,5 +56,10 @@ class Rally extends Model
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function stages()
+    {
+        return $this->hasMany(Stage::class);
     }
 }
