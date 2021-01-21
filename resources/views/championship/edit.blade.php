@@ -2,13 +2,15 @@
 
 @section('title', "Modifica il campionato")
 
+
+@section('content')
+
 <!-- Forms -->
 <form id="deleteForm" action="/championship/{{$championship->id}}" method="POST">
     @csrf
     @method('DELETE')
 </form>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

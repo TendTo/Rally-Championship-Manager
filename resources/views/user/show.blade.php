@@ -4,13 +4,15 @@
 {{$user->name}}
 @endsection
 
+
+@section('content')
+
 <!-- Forms -->
 <form id="deleteForm" class="form-group" action="/user/{{$user->id}}" method="POST">
     @csrf
     @method('DELETE')
 </form>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="card col-md-12">

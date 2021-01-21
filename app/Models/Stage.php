@@ -49,4 +49,9 @@ class Stage extends Model
     {
         return $this->belongsTo(Rally::class);
     }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }

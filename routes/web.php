@@ -11,6 +11,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\StageController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,3 +75,8 @@ Route::resource('championship.participant', ParticipantController::class);
  * Stage routes
  */
 Route::resource('championship.rally.stage', StageController::class);
+
+/**
+ * Result routes
+ */
+Route::resource('championship.rally.stage.result', ResultController::class);

@@ -77,7 +77,9 @@ class StageController extends Controller
      */
     public function show(Championship $championship, Rally $rally, Stage $stage)
     {
-        return view('stage.show', compact('championship', 'rally', 'stage'));
+        $results = $stage->results()->whereNotNull('time')->orderBy('time')->get();
+        $rets = $stage->results()->whereNull('time')->get();
+        return view('stage.show', compact('championship', 'rally', 'stage', 'results', 'rets'));
     }
 
     /**

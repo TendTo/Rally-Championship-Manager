@@ -1,39 +1,29 @@
 @extends('layouts.app')
 
-@section('title', "Modifica il rally")
-
+@section('title', "Crea il risultato")
 
 @section('content')
-
-<!-- Forms -->
-<form id="deleteForm" action="/championship/{{$championship->id}}/rally/{{$rally->id}}/stage/{{$stage->id}}"
-    method="POST">
-    @csrf
-    @method('DELETE')
-</form>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h4>{{ __('Edit the stage!') }}</h4>
+                    <h4>{{ __('Edit the result!') }}</h4>
                 </div>
+
                 <div class="card-body pl-5">
                     <form method="POST"
-                        action="/championship/{{$championship->id}}/rally/{{$rally->id}}/stage/{{$stage->id}}">
+                        action="/championship/{{$championship->id}}/rally/{{$rally->id}}/stage/{{$stage->id}}/result/{{$result->id}}">
                         @csrf
                         @method('PATCH')
 
-                        <!-- Stage name text field -->
+                        <!-- Result time time-pick -->
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right"
-                                for="name">{{ __('Stage name') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right" for="time">{{ __('Time') }}</label>
                             <div class="col-md-6">
-                                <input id="name" name="name" class="form-control @error('name') is-invalid @enderror"
-                                    type="text" placeholder="{{ __('Stage name') }}"
-                                    value="{{ old('name') ??  $stage->name}}" required>
-                                @error('name')
+                                <input id="time" name="time" class="form-control @error('time') is-invalid @enderror"
+                                    type="time" step="0.001" value="{{ old('time') ?? $result->time }}">
+                                @error('time')
                                 <div class="invalid-feedback">
                                     <strong>{{$message}}</strong>
                                 </div>
@@ -41,17 +31,29 @@
                             </div>
                         </div>
 
-                        <!-- Stage desc text field -->
+                        <!-- Result penality time-pick -->
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right"
-                                for="desc">{{ __('Stage description') }}</label>
+                                for="penality">{{ __('Penality') }}</label>
                             <div class="col-md-6">
-                                <textarea id="desc" name="desc" class="form-control @error('desc') is-invalid @enderror"
-                                    rows="4">{{ old('desc') ?? $stage->desc}}</textarea>
-                                @error('desc')
+                                <input id="penality" name="penality"
+                                    class="form-control @error('penality') is-invalid @enderror" type="time"
+                                    step="0.001" value="{{ old('penality') ?? $result->penality }}">
+                                @error('penality')
                                 <div class="invalid-feedback">
                                     <strong>{{$message}}</strong>
                                 </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Result RET checkbox -->
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">Retired:</label>
+                            <div class="col-md-6">
+                                <input id="ret" name="ret" class="mt-2" type="checkbox">
+                                @error('ret')
+                                <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
                         </div>
@@ -65,12 +67,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Save changes') }}
                                 </button>
-                                <!-- Delete button -->
-                                @can('delete', $championship)
-                                <button class="btn btn-danger btn-lg offset-md-3" type="submit" form="deleteForm"
-                                    onclick="return confirm('Tutti i dati di questo stage verranno rimossi.\nProcedere comunque?')"><i
-                                        class="fa fa-trash"></i></button>
-                                @endcan
                             </div>
                         </div>
                     </form>
@@ -79,4 +75,5 @@
         </div>
     </div>
 </div>
+
 @endsection

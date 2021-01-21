@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', "Crea un campionato")
+@section('title', "Modifica l'utente")
+
+
+@section('content')
 
 <!-- Forms -->
 <form id="deleteForm" action="/user/{{$user->id}}" method="POST">
@@ -8,7 +11,6 @@
     @csrf
 </form>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

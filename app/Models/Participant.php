@@ -50,4 +50,8 @@ class Participant extends Model
         return $this->belongsTo(Car::class);
     }
 
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }

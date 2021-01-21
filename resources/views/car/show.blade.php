@@ -4,13 +4,15 @@
 {{$car->name}}
 @endsection
 
+
+@section('content')
+
 <!-- Forms -->
 <form id="deleteForm" class="form-group" action="/car/{{$car->id}}" method="POST">
     @csrf
     @method('DELETE')
 </form>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="card col-md-12">

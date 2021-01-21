@@ -4,19 +4,21 @@
 {{$championship->name}}
 @endsection
 
+
+@section('content')
+
 <!-- Forms -->
 <form id="deleteForm" class="form-group" action="/championship/{{$championship->id}}" method="POST">
     @csrf
     @method('DELETE')
 </form>
 
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="card col-md-12">
             <div class="card-body">
-                <div class="row ml-0">
-                    <h4 class="card-title">{{$championship->name}}</h4>
+                <div class="row ml-0 mb-2 d-flex align-items-center">
+                    <h4 class="card-title mb-0">{{$championship->name}}</h4>
                     <!-- Settings -->
                     @can('update', $championship)
                     <div class="ml-3">
