@@ -47,7 +47,7 @@
                         class="fa fa-car"></i></a> --}}
                     <a href="/championship/{{$championship->id}}/participant" class="card-link">{{__('Pilots')}} <i
                             class="fa fa-users"></i></a>
-                    <a href="#" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
+                    <a href="/championship/{{$championship->id}}/result" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
                 </div>
                 <hr>
                 @if($championship->rallies->count() > 0)

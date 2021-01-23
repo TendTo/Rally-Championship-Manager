@@ -42,7 +42,7 @@
                 <hr>
                 <p class="card-text">{{$rally->desc}}</p>
                 <div>
-                    <a href="#" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
+                    <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}/result" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
                 </div>
                 <hr>
                 @if($rally->stages->count() > 0)

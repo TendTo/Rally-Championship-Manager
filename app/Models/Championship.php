@@ -9,6 +9,19 @@ class Championship extends Model
 {
     use HasFactory;
 
+    public static $points = [
+        0 => 25,
+        1 => 18,
+        2 => 15,
+        3 => 12,
+        4 => 10,
+        5 => 8,
+        6 => 6,
+        7 => 4,
+        8 => 2,
+        9 => 1
+    ];
+
     public static function get_validation_create():array
     {
         return [

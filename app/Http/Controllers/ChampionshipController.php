@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Championship;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChampionshipController extends Controller
 {
@@ -82,6 +83,86 @@ class ChampionshipController extends Controller
     public function show(Championship $championship)
     {
         return view('championship.show', compact('championship'));
+    }
+
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Championship $championship
+         * @param  \App\Models\Rally        $rally
+         * @return \Illuminate\Http\Response
+         */
+    public function result(Championship $championship)
+    {
+        $chart = [];
+        foreach ($championship->rallies as $rally){
+            $rets = DB::table('rallies')
+                ->join('stages', 'rallies.id', '=', 'stages.rally_id')
+                ->join('results as r', 'stages.id', '=', 'r.stage_id')
+                ->select('r.participant_id')
+                ->distinct()
+                ->where('rallies.id', $rally->id)
+                ->whereNull('time')
+                ->get()
+                ->all();
+
+            //Get array with structure [participant_id] with all the retired participants
+            $rets = array_map(
+                function ($object) {
+                    return $object->participant_id;
+                }, $rets
+            );
+
+            //Get array with structure ['participant_id' => participant_id, 'tot_time' => total_time] without all the retired participant
+            $results = DB::table('rallies')
+                ->join('stages', 'rallies.id', '=', 'stages.rally_id')
+                ->join('results as r', 'stages.id', '=', 'r.stage_id')
+                ->select(
+                    DB::raw(
+                        'r.participant_id, SEC_TO_TIME(SUM(TIME_TO_SEC( r.time ))  
+                    + SUM(microsecond(r.time))/1000000 
+                    + SUM(TIME_TO_SEC( r.penality ))
+                    + SUM(microsecond(r.penality))/1000000)
+                    as tot_time'
+                    )
+                )
+                ->where('rallies.id', $rally->id)
+                ->whereNotIn('r.participant_id', $rets)
+                ->groupBy('r.participant_id')
+                ->orderBy('tot_time', 'asc')
+                ->get()
+                ->all();
+
+            //Get array with structure ['participant' => Participant::class, 'tot_time' => total_time] without all the retired participant
+            $results = array_map(
+                function ($e, $i) {
+                    $array = [];
+                    $array['rally_id'] = -1;
+                    $array['participant_id'] = $e->participant_id;
+                    $array['pos'] = $i;
+                    return $array;
+                }, $results, array_keys($results)
+            );
+            
+            foreach ($results as $result) {
+                if (!isset($chart[$result['participant_id']])) {
+                    $chart[$result['participant_id']] = Championship::$points[$result['pos']];
+                }else{
+                    $chart[$result['participant_id']] += Championship::$points[$result['pos']];
+                }
+            }
+            
+            //Get array with structure ['participant' => Participant::class] with all the retired participants
+            
+        }
+        arsort($chart);
+        $chart = array_map(
+            function ($k, $e) {
+                return ['participant' => Participant::find($k), 'points'=>$e];
+            }, array_keys($chart), $chart
+        );
+
+        return view('championship.result', compact('championship', 'chart'));
     }
 
     /**
