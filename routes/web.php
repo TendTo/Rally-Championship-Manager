@@ -40,20 +40,20 @@ Auth::routes();
 /**
  * Championship routes
  */
-Route::get('/championship/archived', [ChampionshipController::class, 'index_archived']);
-Route::get('championship/{championship}/result', [ChampionshipController::class, 'result']);
+Route::get('/championship/archived', [ChampionshipController::class, 'index_archived'])->name('championship.archived');
+Route::get('championship/{championship}/result', [ChampionshipController::class, 'result'])->name('championship.result');
 Route::resource('championship', ChampionshipController::class);
 
 /**
  * Location routes
  */
-Route::get('location', [LocationController::class, 'index']);
-Route::get('location/{id}', [LocationController::class, 'show']);
+Route::get('location', [LocationController::class, 'index'])->name('location.index');
+Route::get('location/{id}', [LocationController::class, 'show'])->name('location.show');
 
 /**
  * Rally routes
  */
-Route::get('championship/{championship}/rally/{rally}/result', [RallyController::class, 'result']);
+Route::get('championship/{championship}/rally/{rally}/result', [RallyController::class, 'result'])->name('rally.result');
 Route::resource('championship.rally', RallyController::class);
 
 /**
@@ -69,8 +69,8 @@ Route::resource('car', CarController::class);
 /**
  * Participant routes
  */
-Route::patch('championship/{championship}/participant/{participant}/upgrade', [ParticipantController::class, 'upgrade']);
-Route::patch('championship/{championship}/participant/{participant}/downgrade', [ParticipantController::class, 'downgrade']);
+Route::patch('championship/{championship}/participant/{participant}/upgrade', [ParticipantController::class, 'upgrade'])->name('participant.upgrade');
+Route::patch('championship/{championship}/participant/{participant}/downgrade', [ParticipantController::class, 'downgrade'])->name('participant.downgrade');
 Route::resource('championship.participant', ParticipantController::class);
 
 /**
