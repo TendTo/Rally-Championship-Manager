@@ -1,62 +1,43 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Rally championship manager
+Let this web application manage the boring stuff of your rally championship, keeping track of results and points for each rally and stage, so you can be focused on achieving the best TEMPO!!
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Table of contents
 
-## About Laravel
+- **[:wrench: Setting up a local istance](#wrench-setting-up-a-local-istance)**
+- **[:whale: Setting up a Docker container](#whale-setting-up-a-docker-container)**
+- **[:bar_chart: _\[Optional\]_ Setting up testing](#bar_chart-optional-setting-up-testing)**
+- **[:books: Documentation](#books-documentation)**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## :wrench: Setting up a local istance
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### System requirements
+- [PHP 7.3+](https://www.php.net/downloads.php)
+- [Composer](https://getcomposer.org/download/)
+- [node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Steps:
+- Clone this repository
+- Make sure you have a database to store the date of the application, and fill the needed info in the _.env_ file or as environment variables
+- **Run** `composer install` to insall all the php dependencies
+- **Run** `npm install && npm run dev && npm run dev` to install the js dependencies to use bootstrap
+- **Run** `php artisan migrate` to start a database migration
+- **Run** `php artisan serve` to launch the web server
 
-## Learning Laravel
+## :bar_chart: _[Optional]_ Setting up testing
+Some basic tests have already been implemented, but there is no thing like too much testing, so some additions would be welcome.
+You can do so by **running**
+`php artisan make:test [-u] <subfolder/testName>`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Before starting, you may want to change the _phpunit.xml_ file, these settings:
+```xml
+<server  name="DB_CONNECTION"  value="mysql"/>
+<server  name="DB_DATABASE"  value="rally_laravel_test"/>
+```
+I'd suggest using a **different database** from the one you use to store data, since a testing session will wipe every previous entry in the database, and this might not be what you want.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+To actually start the tests, **run**
+`php artisan test`
+  
+## Credits
+The [Laravel](https://github.com/laravel/laravel) framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
