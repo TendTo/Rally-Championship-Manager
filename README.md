@@ -20,12 +20,12 @@ A live version is available [here](https://rally-championship-manager.herokuapp.
 
 ### Steps:
 - Clone this repository
-- You may need to install the php driver for the kind of database you want to use. Something like `sudo apt install php-mysql` for mysql, `sudo apt-get install php-sqlite3` for sqlite or `sudo apt-get install php-pgsql` for PostgreSQL
-- Rename the _.env.example_ file in _.evn_
-- Make sure you have a database to store the data of the application, and fill the needed info in the _.env_ file or as environment variables
-- **Run** `composer install` to insall all the php dependencies
 - **Run** `composer install` to insall all the php dependencies
 - **Run** `npm install && npm run dev && npm run dev` to install the js dependencies to use bootstrap
+- You may need to install the php driver for the kind of database you want to use. Something like `sudo apt install php-mysql` for mysql, `sudo apt-get install php-sqlite3` for sqlite or `sudo apt-get install php-pgsql` for PostgreSQL
+- Rename the _.env.example_ file in _.evn_
+- **Run** `php artisan key:generate` to generate a key the application will use
+- Make sure you have a database to store the data of the application, and fill the needed info in the _.env_ file or as environment variables
 - **Run** `php artisan migrate` to start a database migration
 - **Run** `php artisan serve` to launch the web server
 
