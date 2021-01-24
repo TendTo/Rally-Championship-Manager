@@ -49,7 +49,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $locations = Location::all();
+        $locations = Location::orderBy('country_name')->get();
         return view('auth.register', compact('locations'));
     }
 

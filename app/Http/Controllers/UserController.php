@@ -70,7 +70,7 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
 
-        $locations = Location::all();
+        $locations = Location::orderBy('country_name')->get();
         return view('user.edit', compact('user', 'locations'));
     }
 

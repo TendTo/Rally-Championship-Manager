@@ -23,8 +23,8 @@ class CarFactory extends Factory
     {
         return [
             'model'=> "Model ".$this->faker->unique()->firstName,
-            'constructor'=>$this->faker->word,
-            'category'=>$this->faker->word,
+            'constructor'=>"Contructor ".$this->faker->word,
+            'category'=>"Category ".$this->faker->word,
         ];
     }
 }

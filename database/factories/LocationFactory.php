@@ -23,6 +23,7 @@ class LocationFactory extends Factory
     {
         return [
             'country_code'=> $this->faker->unique()->countryCode,
+            'country_name'=> $this->faker->unique()->firstName,
         ];
     }
 }

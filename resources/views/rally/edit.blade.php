@@ -65,7 +65,7 @@
                                     @foreach ($locations as $location)
                                     <option value="{{ $location->id }}"
                                         {{( $location->id == $rally->location->id || old('location_id') == $location->id ? "selected":"") }}>
-                                        {{ $location->country_code }}
+                                        {{ $location->country_name }}
                                     </option>
                                     @endforeach
                                 </select>

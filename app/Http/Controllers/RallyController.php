@@ -43,7 +43,7 @@ class RallyController extends Controller
     public function create(Championship $championship)
     {
         $this->authorize('update', $championship);
-        $locations = Location::all();
+        $locations = Location::orderBy('country_name')->get();
         return view('rally.create', compact('championship', 'locations'));
     }
 
@@ -176,7 +176,7 @@ class RallyController extends Controller
     public function edit(Championship $championship, Rally $rally)
     {
         $this->authorize('update', $championship);
-        $locations = Location::all();
+        $locations = Location::orderBy('country_name')->get();
         return view('rally.edit', compact('championship', 'rally', 'locations'));
     }
 

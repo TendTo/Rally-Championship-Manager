@@ -35,7 +35,7 @@
                     </div>
                     @endcan
                 </div>
-                <h6 class="card-subtitle mb-2 text-muted">{{$rally->location->country_code}}
+                <h6 class="card-subtitle mb-2 text-muted">{{$rally->location->country_name}}
                     <span
                         class="flag-icon flag-icon-{{strtolower($rally->location->country_code)}} flag-icon-squared"></span>
                 </h6>

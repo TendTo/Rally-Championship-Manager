@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('db:country_names', function () {
+    $locations = \App\Models\Location::all();
+    foreach ($locations as $location){
+        $data = ['country_name'=>\App\Models\Location::code_to_country($location->country_code)];
+        $location->update($data);
+    }
+})->purpose('Set all the names of the countries');
