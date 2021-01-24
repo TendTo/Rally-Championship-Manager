@@ -34,9 +34,9 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{$car->category}}</h6>
                 <hr>
                 <p class="card-text">{{$car->constructor}}</p>
-                <div>
+                {{-- <div>
                     <a href="#" class="card-link">{{__('Pilots')}} <i class="fa fa-users"></i></a>
-                </div>
+                </div> --}}
                 <hr>
                 <div class="modal-footer">
                     <!-- Back button -->

@@ -113,25 +113,46 @@ class ChampionshipController extends Controller
                 }, $rets
             );
 
-            //Get array with structure ['participant_id' => participant_id, 'tot_time' => total_time] without all the retired participant
-            $results = DB::table('rallies')
-                ->join('stages', 'rallies.id', '=', 'stages.rally_id')
-                ->join('results as r', 'stages.id', '=', 'r.stage_id')
-                ->select(
-                    DB::raw(
-                        'r.participant_id, SEC_TO_TIME(SUM(TIME_TO_SEC( r.time ))  
-                    + SUM(microsecond(r.time))/1000000 
-                    + SUM(TIME_TO_SEC( r.penality ))
-                    + SUM(microsecond(r.penality))/1000000)
-                    as tot_time'
+            $result = [];
+            if (env('DB_CONNECTION') == 'mysql') { 
+                $results = DB::table('rallies')
+                    ->join('stages', 'rallies.id', '=', 'stages.rally_id')
+                    ->join('results as r', 'stages.id', '=', 'r.stage_id')
+                    ->select(
+                        DB::raw(
+                            'r.participant_id, SEC_TO_TIME(SUM(TIME_TO_SEC( r.time ))  
+                            + SUM(microsecond(r.time))/1000000 
+                            + SUM(TIME_TO_SEC( r.penality ))
+                            + SUM(microsecond(r.penality))/1000000)
+                            as tot_time'
+                        )
                     )
-                )
-                ->where('rallies.id', $rally->id)
-                ->whereNotIn('r.participant_id', $rets)
-                ->groupBy('r.participant_id')
-                ->orderBy('tot_time', 'asc')
-                ->get()
-                ->all();
+                    ->where('rallies.id', $rally->id)
+                    ->whereNotIn('r.participant_id', $rets)
+                    ->groupBy('r.participant_id')
+                    ->orderBy('tot_time', 'asc')
+                    ->get()
+                    ->all();
+            } else if(env('DB_CONNECTION') == 'pgsql') { 
+                $results = DB::table('rallies')
+                    ->join('stages', 'rallies.id', '=', 'stages.rally_id')
+                    ->join('results as r', 'stages.id', '=', 'r.stage_id')
+                    ->select(
+                        DB::raw(
+                            'r.participant_id, SUM( r.time )  
+                            + SUM( r.penality )
+                            as tot_time'
+                        )
+                    )
+                    ->where('rallies.id', $rally->id)
+                    ->whereNotIn('r.participant_id', $rets)
+                    ->groupBy('r.participant_id')
+                    ->orderBy('tot_time', 'asc')
+                    ->get()
+                    ->all();
+            }
+            //Get array with structure ['participant_id' => participant_id, 'tot_time' => total_time] without all the retired participant
+
 
             //Get array with structure ['participant' => Participant::class, 'tot_time' => total_time] without all the retired participant
             $results = array_map(
