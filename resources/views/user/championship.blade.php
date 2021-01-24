@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
-@section('title', "Lista di campionati archiviati")
+@section('title', "Lista di campionati")
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="jumbotron col-md-12">
-            <h1 class="display-5">{{__('Archived championships')}}</h1>
-            <p class="lead">{{__('These championships have been archived. You can still edit them.')}}</p>
+            <h1 class="display-5">{{__('Personal championship list')}}</h1>
             <hr class="my-4">
             <ul class="list-group">
                 <!-- List of items -->
@@ -20,8 +19,8 @@
                 </li>
                 @endforeach
             </ul>
-            <!-- Back button -->
             <div class="modal-footer">
+                <!-- Back button -->
                 <a href="/championship"><i class="btn btn-primary fa fa-arrow-left"></i></a>
             </div>
         </div>

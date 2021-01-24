@@ -41,9 +41,6 @@
                 </h6>
                 <hr>
                 <p class="card-text">{{$rally->desc}}</p>
-                <div>
-                    <a href="#" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
-                </div>
                 <hr>
                 @if(count($results) > 0)
                 <h5>Results</h5>

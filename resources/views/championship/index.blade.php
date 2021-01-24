@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="jumbotron col-md-12">
-            <h1 class="display-5">{{__('Championships\' list')}}</h1>
+            <h1 class="display-5">{{__('Championship list')}}</h1>
             <hr class="my-4">
             <ul class="list-group">
                 <!-- List of items -->
@@ -16,7 +16,6 @@
                         <h5>{{$item->name}}</h5>
                         <div class="text-muted">{{$item->desc}}</div>
                     </a>
-                    {{-- <a href="/championship/{{$item->id}}/edit"><i class="fa fa-pencil"></i></a> --}}
                 </li>
                 @endforeach
             </ul>

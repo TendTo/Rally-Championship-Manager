@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Championship;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,23 @@ class UserController extends Controller
         $this->authorize('view', $user);
 
         return view('user.show', compact('user'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function championship(User $user)
+    {
+        $participants = $user->participants->all();
+        $participants = array_map(function ($e){
+            return $e->id;
+        }, $participants);
+        $collection = Championship::find($participants);
+        //dd($collection);
+        return view('user.championship', compact('user', 'collection'));
     }
 
     /**

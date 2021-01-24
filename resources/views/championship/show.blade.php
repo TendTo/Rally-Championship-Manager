@@ -43,8 +43,6 @@
                 <hr>
                 <p class="card-text">{{$championship->desc}}</p>
                 <div>
-                    {{-- <a href="/championship/{{$championship->id}}/rally" class="card-link">{{__('Rallies')}} <i
-                        class="fa fa-car"></i></a> --}}
                     <a href="/championship/{{$championship->id}}/participant" class="card-link">{{__('Pilots')}} <i
                             class="fa fa-users"></i></a>
                     <a href="/championship/{{$championship->id}}/result" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
@@ -61,7 +59,6 @@
                             <h5>{{$item->name}}</h5>
                             <div class="text-muted">{{$item->desc}}</div>
                         </a>
-                        {{-- <a href="/championship/{{$item->id}}/edit"><i class="fa fa-pencil"></i></a> --}}
                     </li>
                     @endforeach
                 </ul>

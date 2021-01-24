@@ -14,16 +14,16 @@
       @else
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/championship">Campionati</a>
+          <a class="nav-link" href="/championship">Championship</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user">Piloti</a>
+          <a class="nav-link" href="/user">Pilots</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/car">Vetture</a>
+          <a class="nav-link" href="/car">Cars</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="/about">About</a>
         </li>
       </ul>
       @endguest

@@ -30,6 +30,12 @@ Route::get(
     }
 );
 
+Route::get(
+    '/about', function () {
+        return view('about');
+    }
+);
+
 /**
  * Auth routes
  */
@@ -59,6 +65,7 @@ Route::resource('championship.rally', RallyController::class);
 /**
  * User routes
  */
+Route::get('user/{user}/championship', [UserController::class, 'championship']);
 Route::resource('user', UserController::class);
 
 /**
