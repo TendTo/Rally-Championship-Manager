@@ -63,18 +63,27 @@
                     {{Carbon\Carbon::parse($participant->user->birthday)->format('d/m/Y')}}
                 </h6>
                 <hr>
-                <p class="card-text">{{$participant->car_id ? $participant->car->model : __('No car selected')}}</p>
+                @if ($participant->car_id)
+                <a href="'/car/'{{$participant->car->id}}" class="text-decoration-none">
+                    {{$participant->car->model}}
+                </a>
+                @else
+                <p class="card-text">
+                    {{__('No car selected')}}
+                </p>
+                @endif
                 {{-- <div>
                     <a href="#" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
-                </div> --}}
-                <hr>
-                <div class="modal-footer">
-                    <!-- Back button -->
-                    <a href="/championship/{{$championship->id}}/participant"><i class="btn btn-primary fa fa-arrow-left"></i></a>
-                </div>
+            </div> --}}
+            <hr>
+            <div class="modal-footer">
+                <!-- Back button -->
+                <a href="/championship/{{$championship->id}}/participant"><i
+                        class="btn btn-primary fa fa-arrow-left"></i></a>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 @endsection

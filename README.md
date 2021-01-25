@@ -18,11 +18,15 @@ A live version is available [here](https://rally-championship-manager.herokuapp.
 - [node.js](https://nodejs.org/en/)
 - [npm](https://www.npmjs.com/)
 
+### Additional requirements
+- Php driver for the kind of database you want to use. Something like `php-mysql` for mysql, `php-sqlite3` for sqlite or `php-pgsql` for PostgreSQL
+- php-xml
+- php-mbstring
+
 ### Steps:
 - Clone this repository
 - **Run** `composer install` to insall all the php dependencies
 - **Run** `npm install && npm run dev && npm run dev` to install the js dependencies to use bootstrap
-- You may need to install the php driver for the kind of database you want to use. Something like `sudo apt install php-mysql` for mysql, `sudo apt-get install php-sqlite3` for sqlite or `sudo apt-get install php-pgsql` for PostgreSQL
 - Rename the _.env.example_ file in _.evn_
 - **Run** `php artisan key:generate` to generate a key the application will use
 - Make sure you have a database to store the data of the application, and fill the needed info in the _.env_ file or as environment variables
@@ -56,4 +60,5 @@ To actually start the tests, **run**
 `php artisan test`
   
 ## Credits
-The [Laravel](https://github.com/laravel/laravel) framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- The [Laravel](https://github.com/laravel/laravel) framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [Bootswatch (Darkly)](https://bootswatch.com/darkly/) for the css styling
