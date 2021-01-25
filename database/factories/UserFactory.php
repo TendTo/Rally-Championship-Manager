@@ -26,7 +26,7 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail,
+            'email' => "test@test.it",
             'location_id' => Location::factory()->create()->id,
             'birthday' => $this->faker->date(),
             'email_verified_at' => now(),

@@ -14,5 +14,10 @@ class LocationSeeder extends Seeder
     public function run()
     {
         \App\Models\Location::factory(20)->create();
+        $locations = \App\Models\Location::all();
+        foreach ($locations as $location){
+            $data = ['country_name'=>\App\Models\Location::code_to_country($location->country_code)];
+            $location->update($data);
+        }
     }
 }

@@ -13,8 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        LocationSeeder::run();
-        CarSeeder::run();
-        RallySeeder::run();
+        $this->call(LocationSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(CarSeeder::class);
+        $this->call(StageSeeder::class);
+        $this->call(ParticipantSeeder::class);
     }
 }

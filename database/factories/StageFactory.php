@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Participant;
+use App\Models\Stage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ParticipantFactory extends Factory
+class StageFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Participant::class;
+    protected $model = Stage::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,8 @@ class ParticipantFactory extends Factory
     public function definition()
     {
         return [
-            'is_admin' => true,
+            'name' => "Stage ".$this->faker->name,
+            'desc' => $this->faker->realText,
         ];
     }
 }

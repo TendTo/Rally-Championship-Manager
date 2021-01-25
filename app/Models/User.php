@@ -65,9 +65,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Participant::class);
     }
-
-    public function championships()
-    {
-        return $this->hasManyThrough(Championship::class, Participant::class);
-    }
 }
