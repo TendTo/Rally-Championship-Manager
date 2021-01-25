@@ -43,7 +43,7 @@
                 <hr>
                 <p class="card-text">{{$championship->desc}}</p>
                 <div>
-                    <a href="/championship/{{$championship->id}}/participant" class="card-link">{{__('Pilots')}} <i
+                    <a href="/championship/{{$championship->id}}/participant" class="card-link">{{__('Participants')}} <i
                             class="fa fa-users"></i></a>
                     <a href="/championship/{{$championship->id}}/result" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
                 </div>

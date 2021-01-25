@@ -64,10 +64,9 @@
                 </h6>
                 <hr>
                 <p class="card-text">{{$participant->car_id ? $participant->car->model : __('No car selected')}}</p>
-                <div>
-                    <a href="/championship/" class="card-link">{{__('Stages')}} <i class="fa fa-car"></i></a>
+                {{-- <div>
                     <a href="#" class="card-link">{{__('Chart')}} <i class="fa fa-flag-checkered"></i></a>
-                </div>
+                </div> --}}
                 <hr>
                 <div class="modal-footer">
                     <!-- Back button -->

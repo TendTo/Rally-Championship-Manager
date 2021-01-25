@@ -43,16 +43,16 @@
                 <ul class="list-group">
                     <!-- List of results -->
                     @foreach ($chart as $i=>$item)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item">
                         <div class="row ml-1">
-                            <div>{{$i + 1}}</div>
-                            <div class="pl-3">
+                            <div class="col-1">{{$i + 1}}</div>
+                            <div class="col-4">
                                 <h5>{{$item['participant']->user->name}} {{$item['participant']->user->surname}} </h5>
                                 <span
                                     class="flag-icon flag-icon-{{strtolower($item['participant']->user->location->country_code)}} flag-icon-squared"></span>
                             </div>
-                            <div class="row pl-3">
-                                <p class="ml-3">-</p> <h5 class="ml-3">{{$item['points']}}</h5>
+                            <div class="col-3">
+                                <h5 class="ml-3">{{$item['points']}}</h5>
                             </div>
                         </div>
                     </li>

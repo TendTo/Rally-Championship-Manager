@@ -83,6 +83,7 @@ class ResultController extends Controller
      */
     public function edit(Championship $championship, Rally $rally, Stage $stage, Result $result)
     {
+        $this->authorize('update', $championship);
         return view('result.edit', compact('championship', 'rally', 'stage', 'result'));
     }
 

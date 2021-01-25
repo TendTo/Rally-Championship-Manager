@@ -53,10 +53,9 @@ class UserController extends Controller
     {
         $participants = $user->participants->all();
         $participants = array_map(function ($e){
-            return $e->id;
+            return $e->championship_id;
         }, $participants);
         $collection = Championship::find($participants);
-        //dd($collection);
         return view('user.championship', compact('user', 'collection'));
     }
 
