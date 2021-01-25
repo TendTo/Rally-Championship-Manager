@@ -116,7 +116,7 @@ class RallyController extends Controller
             function ($e) {
                 $array = [];
                 $array['participant'] = Participant::find($e->participant_id);
-                $array['tot_time'] = substr($e->tot_time, 0, -1);
+                $array['tot_time'] = substr(\Carbon\Carbon::parse($e->tot_time)->format('H:i:s.u'), 0, 12);
                 return $array;
             }, $results
         );

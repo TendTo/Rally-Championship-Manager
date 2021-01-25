@@ -58,14 +58,19 @@
                             </div>
                             <div class="col-5">
                                 <div class="row">
-                                    <h5>{{$item->time}}</h5>
+                                    <h5>{{substr(\Carbon\Carbon::parse($item->time)->format('H:i:s.u'), 0, 12)}}</h5>
                                     <div class="ml-2 text-muted">
-                                        {{$item->penality}}
+                                        {{substr(\Carbon\Carbon::parse($item->penality)->format('H:i:s.u'), 0, 12)}}
                                     </div>
                                 </div>
                                 @if ($i != 0)
                                 <div class="text-danger">
-                                    +{{\App\Utility\Utility::sum_time(\App\Utility\Utility::sum_time($item->time, $item->penality), \App\Utility\Utility::sum_time($results[0]->time, $results[0]->penality), '-')}}
+                                    +{{\App\Utility\Utility::sum_time(\App\Utility\Utility::sum_time(
+                                        $item->time, 
+                                        $item->penality), 
+                                        \App\Utility\Utility::sum_time(
+                                            $results[0]->time, 
+                                            $results[0]->penality), '-')}}
                                 </div>
                                 @endif
                             </div>
