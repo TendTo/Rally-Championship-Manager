@@ -47,16 +47,21 @@
                 <ul class="list-group">
                     <!-- List of results -->
                     @foreach ($results as $i=>$item)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item">
                         <div class="row ml-1">
-                            <div>{{$i + 1}}</div>
-                            <div class="pl-3">
+                            <div class="col-1">{{$i + 1}}</div>
+                            <div class="col-4">
                                 <h5>{{$item['participant']->user->name}} {{$item['participant']->user->surname}} </h5>
                                 <span
                                     class="flag-icon flag-icon-{{strtolower($item['participant']->user->location->country_code)}} flag-icon-squared"></span>
                             </div>
-                            <div class="pl-3">
+                            <div class="col-5">
                                 <h5>{{$item['tot_time']}}</h5>
+                                @if ($i != 0)
+                                <div class="text-danger">
+                                    +{{\App\Utility\Utility::sum_time($item['tot_time'], $results[0]['tot_time'], '-')}}
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </li>
@@ -65,17 +70,16 @@
                     @if (count($rets) > 0)
                     <!-- List of retired pilots -->
                     @foreach ($rets as $item)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item">
                         <div class="row ml-1">
-                            <div>-</div>
-                            <div class="pl-3">
+                            <div class="col-1">-</div>
+                            <div class="col-4">
                                 <h5>{{$item->user->name}} {{$item->user->surname}} </h5>
                                 <span
                                     class="flag-icon flag-icon-{{strtolower($item->user->location->country_code)}} flag-icon-squared"></span>
                             </div>
-                            <div class="pl-3">
+                            <div class="col-5">
                                 <h5>{{__('RET')}}</h5>
-                                <div class="text-muted">{{__('RET')}}</div>
                             </div>
                         </div>
                     </li>
@@ -84,7 +88,8 @@
                 @endif
                 <div class="modal-footer">
                     <!-- Back button -->
-                    <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}"><i class="btn btn-primary fa fa-arrow-left"></i></a>
+                    <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}"><i
+                            class="btn btn-primary fa fa-arrow-left"></i></a>
                 </div>
             </div>
         </div>

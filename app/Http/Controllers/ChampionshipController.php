@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Championship;
 use App\Models\Participant;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -96,63 +97,27 @@ class ChampionshipController extends Controller
     {
         $chart = [];
         foreach ($championship->rallies as $rally){
-            $rets = DB::table('rallies')
-                ->join('stages', 'rallies.id', '=', 'stages.rally_id')
-                ->join('results as r', 'stages.id', '=', 'r.stage_id')
-                ->select('r.participant_id')
-                ->distinct()
-                ->where('rallies.id', $rally->id)
-                ->whereNull('time')
-                ->get()
-                ->all();
+            $rets = $rally->results()->whereNull('time')->get()->toArray();
 
             //Get array with structure [participant_id] with all the retired participants
             $rets = array_map(
                 function ($object) {
-                    return $object->participant_id;
+                    return $object['participant_id'];
                 }, $rets
             );
 
             $result = [];
-            if (env('DB_CONNECTION') == 'mysql') { 
-                $results = DB::table('rallies')
-                    ->join('stages', 'rallies.id', '=', 'stages.rally_id')
-                    ->join('results as r', 'stages.id', '=', 'r.stage_id')
-                    ->select(
-                        DB::raw(
-                            'r.participant_id, SEC_TO_TIME(SUM(TIME_TO_SEC( r.time ))  
-                            + SUM(microsecond(r.time))/1000000 
-                            + SUM(TIME_TO_SEC( r.penality ))
-                            + SUM(microsecond(r.penality))/1000000)
-                            as tot_time'
-                        )
-                    )
-                    ->where('rallies.id', $rally->id)
-                    ->whereNotIn('r.participant_id', $rets)
-                    ->groupBy('r.participant_id')
-                    ->orderBy('tot_time', 'asc')
-                    ->get()
-                    ->all();
-            } else if(env('DB_CONNECTION') == 'pgsql') { 
-                $results = DB::table('rallies')
-                    ->join('stages', 'rallies.id', '=', 'stages.rally_id')
-                    ->join('results as r', 'stages.id', '=', 'r.stage_id')
-                    ->select(
-                        DB::raw(
-                            'r.participant_id, SUM( r.time )  
-                            + SUM( r.penality )
-                            as tot_time'
-                        )
-                    )
-                    ->where('rallies.id', $rally->id)
-                    ->whereNotIn('r.participant_id', $rets)
-                    ->groupBy('r.participant_id')
-                    ->orderBy('tot_time', 'asc')
-                    ->get()
-                    ->all();
-            }
-            //Get array with structure ['participant_id' => participant_id, 'tot_time' => total_time] without all the retired participant
-
+            $results = DB::table('rallies')
+                ->join('stages', 'rallies.id', '=', 'stages.rally_id')
+                ->join('results as r', 'stages.id', '=', 'r.stage_id')
+                ->select(DB::raw(Result::get_select()))
+                ->where('rallies.id', $rally->id)
+                ->whereNotIn('r.participant_id', $rets)
+                ->groupBy('r.participant_id')
+                ->orderBy('tot_time', 'asc')
+                ->limit(10)
+                ->get()
+                ->all();
 
             //Get array with structure ['participant' => Participant::class, 'tot_time' => total_time] without all the retired participant
             $results = array_map(
@@ -171,12 +136,11 @@ class ChampionshipController extends Controller
                 }else{
                     $chart[$result['participant_id']] += Championship::$points[$result['pos']];
                 }
-            }
-            
-            //Get array with structure ['participant' => Participant::class] with all the retired participants
-            
+            }                
         }
+
         arsort($chart);
+        //Get array with structure ['participant' => Participant::class] with all the retired participants
         $chart = array_map(
             function ($k, $e) {
                 return ['participant' => Participant::find($k), 'points'=>$e];

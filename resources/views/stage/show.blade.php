@@ -48,20 +48,29 @@
                 <ul class="list-group">
                     <!-- List of results -->
                     @foreach ($results as $i=>$item)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item">
                         <div class="row ml-1">
-                            <div>{{$i + 1}}</div>
-                            <div class="pl-3">
+                            <div class="col-1">{{$i + 1}}</div>
+                            <div class="col-4">
                                 <h5>{{$item->participant->user->name}} {{$item->participant->user->surname}} </h5>
                                 <span
                                     class="flag-icon flag-icon-{{strtolower($item->participant->user->location->country_code)}} flag-icon-squared"></span>
                             </div>
-                            <div class="pl-3">
-                                <h5>{{$item->time != null ? $item->time : 'RET'}}</h5>
-                                <div class="text-muted">{{$item->penality != null ? $item->penality : 'RET'}}</div>
+                            <div class="col-5">
+                                <div class="row">
+                                    <h5>{{$item->time}}</h5>
+                                    <div class="ml-2 text-muted">
+                                        {{$item->penality}}
+                                    </div>
+                                </div>
+                                @if ($i != 0)
+                                <div class="text-danger">
+                                    +{{\App\Utility\Utility::sum_time(\App\Utility\Utility::sum_time($item->time, $item->penality), \App\Utility\Utility::sum_time($results[0]->time, $results[0]->penality), '-')}}
+                                </div>
+                                @endif
                             </div>
                             @can('update', $championship)
-                            <div class="ml-3 row">
+                            <div class="row col-2">
                                 <!-- Edit button -->
                                 <div class="btn">
                                     <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}/stage/{{$stage->id}}/result/{{$item->id}}/edit"
@@ -87,20 +96,21 @@
                     @if ($rets->count() > 0)
                     <!-- List of retired pilots -->
                     @foreach ($rets as $item)
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item">
                         <div class="row ml-1">
-                            <div>-</div>
-                            <div class="pl-3">
+                            <div class="col-1">-</div>
+                            <div class="col-4">
                                 <h5>{{$item->participant->user->name}} {{$item->participant->user->surname}} </h5>
                                 <span
                                     class="flag-icon flag-icon-{{strtolower($item->participant->user->location->country_code)}} flag-icon-squared"></span>
                             </div>
-                            <div class="pl-3">
-                                <h5>{{__('RET')}}</h5>
-                                <div class="text-muted">{{__('RET')}}</div>
+                            <div class="col-5">
+                                <div class="row">
+                                    <h5 class="ml-0">{{__('RET')}}</h5>
+                                </div>
                             </div>
                             @can('update', $championship)
-                            <div class="ml-3 row">
+                            <div class="row col-2">
                                 <!-- Edit button -->
                                 <div class="btn">
                                     <a href="/championship/{{$championship->id}}/rally/{{$rally->id}}/stage/{{$stage->id}}/result/{{$item->id}}/edit"

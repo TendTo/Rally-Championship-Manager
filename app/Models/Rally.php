@@ -62,4 +62,9 @@ class Rally extends Model
     {
         return $this->hasMany(Stage::class);
     }
+
+    public function results()
+    {
+        return $this->hasManyThrough(Result::class, Stage::class);
+    }
 }
