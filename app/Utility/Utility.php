@@ -12,7 +12,8 @@ class Utility
      */
     private static function to_millis(string $date):int
     {
-        list($H, $i, $s, $z) = \preg_split("/[:.]/", $date);
+        list($H, $i, $s, $z) = \array_pad(preg_split("/[:.]/", $date), 4, "0");
+        $z = str_pad($z, 3, "0", STR_PAD_RIGHT);
         return (int) $H * 3600000 + (int) $i * 60000 + (int) $s * 1000 + (int) $z;
     }
 
@@ -21,9 +22,9 @@ class Utility
      */
     private static function to_time(int $millis):string
     {
-        $H = $millis >= 3600000 ? (int) \strval($millis / 3600000) : '00';
-        $i = $millis >= 60000 ? \strval($millis / 60000 % 60) : '00';
-        $s = $millis >= 1000 ? \strval($millis / 1000 % 60): '00';
+        $H = $millis >= 3600000 ? (int) \strval($millis / 3600000) : "00";
+        $i = $millis >= 60000 ? \strval($millis / 60000 % 60) : "00";
+        $s = $millis >= 1000 ? \strval($millis / 1000 % 60): "00";
         $z = \strval($millis % 1000);
         $H = str_pad($H, 2, "0", STR_PAD_LEFT);
         $i = str_pad($i, 2, "0", STR_PAD_LEFT);

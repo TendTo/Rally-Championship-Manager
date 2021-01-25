@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stage;
 use App\Models\Rally;
 use App\Models\Championship;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -78,7 +79,7 @@ class StageController extends Controller
      */
     public function show(Championship $championship, Rally $rally, Stage $stage)
     {
-        $results = $stage->results()->whereNotNull('time')->orderBy(DB::raw('time + penality'))->get();
+        $results = $stage->results()->whereNotNull('time')->orderByRaw(Result::get_orderby())->get();
         $rets = $stage->results()->whereNull('time')->get();
         return view('stage.show', compact('championship', 'rally', 'stage', 'results', 'rets'));
     }
