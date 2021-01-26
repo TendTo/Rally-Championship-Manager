@@ -6,6 +6,7 @@ A live version is available [here](https://rally-championship-manager.herokuapp.
 
 ## Table of contents
 
+- **[:wrench: Starting from scratch](docs/Starting-from-scratch.md)**
 - **[:wrench: Setting up a local istance](#wrench-setting-up-a-local-istance)**
 - **[:whale: Setting up a Docker container](#whale-setting-up-a-docker-container)**
 - **[:bar_chart: _\[Optional\]_ Setting up testing](#bar_chart-optional-setting-up-testing)**
@@ -27,7 +28,7 @@ A live version is available [here](https://rally-championship-manager.herokuapp.
 - Clone this repository
 - **Run** `composer install` to insall all the php dependencies
 - **Run** `npm install && npm run dev && npm run dev` to install the js dependencies to use bootstrap
-- Rename the _.env.example_ file in _.evn_
+- Rename the _.env.example_ file in _.env_
 - **Run** `php artisan key:generate` to generate a key the application will use
 - Make sure you have a database to store the data of the application, and fill the needed info in the _.env_ file or as environment variables
 - **Run** `php artisan migrate` to start a database migration
